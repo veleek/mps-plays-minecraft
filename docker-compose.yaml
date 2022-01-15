@@ -15,6 +15,18 @@ services:
     stdin_open: true
     tty: true
 
+  web:
+    container_name: web-server
+    image: joseluisq/static-web-server
+    environment:
+      SERVER_LOG_LEVEL: trace
+    #  SERVER_HOST: "137.184.112.202"
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - web:/public
+
 volumes:
   minecraft-data:
     driver: local
@@ -22,3 +34,9 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/minecraft'
+  web:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/minecraft/web'
