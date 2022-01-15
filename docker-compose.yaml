@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  minecraft:
+    container_name: minecraft
+    image: itzg/minecraft-bedrock-server
+    environment:
+      EULA: "TRUE"
+      GAMEMODE: survival
+      DIFFICULTY: normal
+      OPS: "2533274795524562"
+    ports:
+      - 19132:19132/udp
+    volumes:
+      - minecraft-data:/data
+    stdin_open: true
+    tty: true
+
+volumes:
+  minecraft-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/minecraft'
